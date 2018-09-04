@@ -1,0 +1,17 @@
+FROM node:alpine
+
+WORKDIR /app
+
+COPY package.json .
+RUN npm install
+
+# This copy isn't necisarry with the way docker-compose is set up
+# because of the volumes that are set up in the docker-compose file.
+# The volumes will use all the files locally and detect changes that 
+# will propigate into the container.
+# However, leaving this here for a reference for development Dockerfile
+# or incase if not using docker-compose in the future
+COPY . .
+
+CMD ["npm", "run", "start"]
+
